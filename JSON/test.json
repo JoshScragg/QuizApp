@@ -1,0 +1,24 @@
+{
+    "categories": [
+        {
+            "Category": "Geography",
+            "Question": [
+                {
+                    "question": "q1",
+                    "incorrect": ["a1", "a2"],
+                    "correct": "a"
+                } 
+            ] 
+        },
+        {
+            "Category": "Movies",
+            "Question": [
+                {
+                    "question": "q1",
+                    "incorrect": ["a1", "a2"],
+                    "correct": "b"
+                } 
+            ]    
+        }
+    ]
+}

@@ -1,0 +1,73 @@
+{
+    "quiz":[
+        {
+            "Title": "Swag",
+            "category": "Clout",
+            "image_location": "300.png",
+            "description": "Swag swag swag lmao",
+            "questions": [
+                {
+                "question": "q1",
+                "answers": ["a1", "a2", "a3"],
+                "answer": 0
+                },
+                {
+                "question": "q2",
+                "answers": ["a1", "a2", "a3"],
+                "answer": 1
+                },
+                {
+                "question": "q3",
+                "answers": ["a1", "a2", "a3"],
+                "answer": 2
+                }
+            ]
+        },
+        {
+            "Title": "SwagV2",
+            "category": "Clout",
+            "image_location": "300.png",
+            "description": "Swag swag swag lmao",
+            "questions": [
+                {
+                "question": "q1",
+                "answers": ["a1", "a2", "a3"],
+                "answer": 0
+                },
+                {
+                "question": "q2",
+                "answers": ["a1", "a2", "a3"],
+                "answer": 1
+                },
+                {
+                "question": "q3",
+                "answers": ["a1", "a2", "a3"],
+                "answer": 2
+                }
+            ]
+        },
+        {
+            "Title": "SwagV3",
+            "category": "Clout",
+            "image_location": "300.png",
+            "description": "Swag swag swag xD",
+            "questions": [
+                {
+                "question": "q1",
+                "answers": ["a1", "a2", "a3"],
+                "answer": 0
+                },
+                {
+                "question": "q2",
+                "answers": ["a1", "a2", "a3"],
+                "answer": 1
+                },
+                {
+                "question": "q3",
+                "answers": ["a1", "a2", "a3"],
+                "answer": 2
+                }
+            ]
+        }
+    ]
+}

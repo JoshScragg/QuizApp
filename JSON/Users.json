@@ -1,0 +1,14 @@
+{
+    "users": [
+        {
+            "username": "Josh",
+            "password": "password",
+            "loggedin": true
+        },
+        {
+            "username": "",
+            "password": "",
+            "loggedin": "False"
+        }
+    ]
+}
