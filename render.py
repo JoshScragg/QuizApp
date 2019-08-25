@@ -132,11 +132,34 @@ class MainApplication():
 
     def rendercategories(self):
         self.root.destroy()
-        setup_categories = CategoryWindow()
+        setup_categories = CategorysWindow()
         setup_categories.render()
 
     def renderProfiles(self):
         setup_profiles = ProfileWindow()
+
+class CategoryWindow():
+    def __init__(self):
+        self.root = Toplevel()
+        self.root.geometry("400x500")
+        self.root.configure(bg="#1A1A1D")
+        self.root.resizable(False, False)
+
+        self.profile_header = Label(self.root, text="Category: Swag", font=("Arial", 18), bg="#1A1A1D", fg="#C3073F")
+        self.profile_header.place(x=10, y=8)
+
+        self.devider = Frame(self.root, bg="#4E4E50", width=500, height=2)
+        self.devider.place(x=0, y=45)
+
+        y_value = 60
+        top_count = 1
+        for i in range(3):
+            self.top_frame = Frame(self.root, bg="#222226", width=380, height=40, highlightbackground="#C3073F", highlightthickness=2)
+            self.top_frame.place(x=11,y=y_value)
+            self.first_label = Label(self.top_frame, text="Quiz {}".format(top_count), font=("Arial", 12), bg="#222226", fg="white")
+            self.first_label.place(x=0, y=6)
+            top_count += 1
+            y_value += 50
 
 class ProfileWindow():
     def __init__(self):
@@ -178,7 +201,7 @@ class ProfileWindow():
 
 
 
-class CategoryWindow():
+class CategorysWindow():
     def __init__(self):
         self.root = Tk() 
         self.root.geometry("1000x600")
@@ -218,8 +241,8 @@ class CategoryWindow():
                 self.cat_title.place(x=100, y=5)
                 self.devider = Frame(self.category1, bg="#4E4E50", width=120, height=2)
                 self.devider.place(x=100, y=42)
-                self.cat_button = Button(self.category1, text="Home", width=16, height=2, bd=0, bg="#C3073F",
-                                activebackground = "#FFF", activeforeground="#C3073F")
+                self.cat_button = Button(self.category1, text="Open", width=16, height=2, bd=0, bg="#C3073F",
+                                activebackground = "#FFF", activeforeground="#C3073F", command=self.renderCategoryWindow)
                 self.cat_button.place(x=102, y=55)
                 cat_count += 1
                 child_frame += 320
@@ -235,3 +258,6 @@ class CategoryWindow():
         setup_quiz = Quizzes()
         setup_app.setup_objects()
         setup_app.render()
+    
+    def renderCategoryWindow(self):
+        setup_catagory = CategoryWindow()
