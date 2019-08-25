@@ -159,9 +159,13 @@ class ProfileWindow():
         self.top_quizzes.place(x=0, y=100)
         
         y_value = 10
+        top_count = 1
         for i in range(3):
             self.top_frame = Frame(self.top_quizzes, bg="#222226", width=340, height=40, highlightbackground="#C3073F", highlightthickness=2)
             self.top_frame.place(x=3,y=y_value)
+            self.first_label = Label(self.top_frame, text="{}. 2018 Movies: 9/10".format(top_count), font=("Arial", 12), bg="#222226", fg="white")
+            self.first_label.place(x=0, y=6)
+            top_count += 1
             y_value += 50
 
     def grabUserInfo(self):
