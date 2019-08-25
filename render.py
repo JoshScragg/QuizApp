@@ -121,9 +121,9 @@ class MainApplication():
         self.quiz_description = Label(self.quiz, text=quiz_description, font=("Arial", 11), bg="#1A1A1D", fg="white")
         self.quiz_description.place(x=105, y=35)
 
-        self.profile_button = Button(self.quiz, text="Play Quiz", width=11, height=5, bd=0, bg="#C3073F",
-                                activebackground = "#FFF", activeforeground="#C3073F")
-        self.profile_button.place(x=854, y=7)
+        self.quiz_button = Button(self.quiz, text="Play Quiz", width=11, height=5, bd=0, bg="#C3073F",
+                                activebackground = "#FFF", activeforeground="#C3073F", command=self.renderQuizWindow)
+        self.quiz_button.place(x=854, y=7)
         y_value += 115
         return y_value
 
@@ -137,6 +137,96 @@ class MainApplication():
 
     def renderProfiles(self):
         setup_profiles = ProfileWindow()
+
+    def renderQuizWindow(self):
+        self.root.destroy()
+        setup_quiz = QuizWindow()
+        setup_quiz.render()
+
+class QuizWindow():
+    def __init__(self):
+        self.root = Tk() 
+        self.root.geometry("1000x600")
+        self.root.resizable(False, False)
+        self.root.configure(bg="#1A1A1D")
+
+        self.logo_img = Image.open("logo.png")
+        self.logo_img = self.logo_img.resize((70, 70))
+        self.logo_img = ImageTk.PhotoImage(self.logo_img)
+        self.logo_img_label = Label(self.root, image = self.logo_img, bg="#1A1A1D")
+        self.logo_img_label.grid(sticky="nw", column=0, row=1)
+
+        self.home_button = Button(self.root, text="Home", width=12, height=3, bd=0, bg="#C3073F",
+                                activebackground = "#FFF", activeforeground="#C3073F")
+        self.home_button.grid(column= 1, row=1, padx=(15,0), pady=15)
+        self.profile_button = Button(self.root, text="Profile", width=12, height=3, bd=0, bg="#C3073F",
+                                activebackground = "#FFF", activeforeground="#C3073F", command=self.renderProfiles)
+        self.profile_button.grid(column= 2, row=1, padx=15, pady=15)
+        self.categories_button = Button(self.root, text="categories", width=12, height=3, bd=0, bg="#C3073F",
+                                activebackground = "#FFF", activeforeground="#C3073F", command=self.rendercategories)
+        self.categories_button.grid(column=3, row=1, padx=0, pady=15)
+        
+        y_value = 170
+
+        quiz_list = self.createQuizObjects()
+
+        self.quiz_header = Label(self.root, text=quiz_list[0].quiz_title, font=("Arial", 18), bg="#1A1A1D", fg="#C3073F")
+        self.quiz_header.place(x=25, y=120)
+        count = 0
+        for i in range(2):
+            self.quiz = Frame(self.root, bg="#1A1A1D", width=950, height=150, highlightbackground="#C3073F", highlightthickness=2)
+            self.quiz.place(x=25, y=y_value)
+            self.question = Label(self.quiz, text=quiz_list[0].questions[count]['question'], font=("Arial", 16), bg="#1A1A1D", fg="white")
+            self.question.place(x=10,y=5)
+
+            self.answer = IntVar()
+            
+            self.radio_button = Radiobutton(self.quiz, bg="#1A1A1D", text="test", variable=self.answer, value=0, command=self.test)
+            self.radio_button.place(x=10,y=40)
+
+            self.radio_button = Radiobutton(self.quiz, bg="#1A1A1D", text="test", variable=self.answer, value=1, command=self.test)
+            self.radio_button.place(x=70,y=40)
+
+            self.radio_button = Radiobutton(self.quiz, bg="#1A1A1D", text="test", variable=self.answer, value=2, command=self.test)
+            self.radio_button.place(x=120,y=40)
+
+            y_value += 200
+            count += 1
+
+    def test(self):
+        print(self.answer1.get())
+        print(self.answer2.get())
+
+    def createQuizObjects(self):
+        json_object = Json("JSON\\Quizzes.json")
+        quiz_json = json_object.read_json()
+
+        count = 1
+        y_value = 100
+        object_list = []
+
+        for quizzes in quiz_json['quiz']:
+            quiz_title = quizzes["Title"]
+            quiz_category = quizzes["category"]
+            image_location = quizzes["image_location"]
+            description = quizzes["description"]
+            questions = quizzes["questions"]
+            quiz_name = "quiz{}".format(count)
+            quiz_name = Quizzes(quiz_title, quiz_category, image_location, description, questions)
+            object_list.append(quiz_name)
+        return object_list
+
+    def rendercategories(self):
+        self.root.destroy()
+        setup_categories = CategorysWindow()
+        setup_categories.render()
+
+    def renderProfiles(self):
+        setup_profiles = ProfileWindow()
+
+    def render(self):
+        self.root.mainloop()
+        
 
 class CategoryWindow():
     def __init__(self):
