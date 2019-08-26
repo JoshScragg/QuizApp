@@ -179,19 +179,11 @@ class QuizWindow():
             self.question = Label(self.quiz, text=quiz_list[0].questions[count]['question'], font=("Arial", 16), bg="#1A1A1D", fg="white")
             self.question.place(x=10,y=5)
 
-            self.answer = IntVar()
+            self.home_button = Button(self.quiz, text="Home", width=12, height=3, bd=0, bg="#C3073F",
+                                activebackground = "#FFF", activeforeground="#C3073F")
+            self.home_button.place(x=100, y=50)
+
             
-            self.radio_button = Radiobutton(self.quiz, bg="#1A1A1D", text="test", variable=self.answer, value=0, command=self.test)
-            self.radio_button.place(x=10,y=40)
-
-            self.radio_button = Radiobutton(self.quiz, bg="#1A1A1D", text="test", variable=self.answer, value=1, command=self.test)
-            self.radio_button.place(x=70,y=40)
-
-            self.radio_button = Radiobutton(self.quiz, bg="#1A1A1D", text="test", variable=self.answer, value=2, command=self.test)
-            self.radio_button.place(x=120,y=40)
-
-            y_value += 200
-            count += 1
 
     def test(self):
         print(self.answer1.get())
