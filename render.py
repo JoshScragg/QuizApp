@@ -165,29 +165,71 @@ class QuizWindow():
         self.categories_button = Button(self.root, text="categories", width=12, height=3, bd=0, bg="#C3073F",
                                 activebackground = "#FFF", activeforeground="#C3073F", command=self.rendercategories)
         self.categories_button.grid(column=3, row=1, padx=0, pady=15)
-        
-        y_value = 170
 
-        quiz_list = self.createQuizObjects()
+        self.count = 0
 
-        self.quiz_header = Label(self.root, text=quiz_list[0].quiz_title, font=("Arial", 18), bg="#1A1A1D", fg="#C3073F")
-        self.quiz_header.place(x=25, y=120)
-        count = 0
-        for i in range(2):
-            self.quiz = Frame(self.root, bg="#1A1A1D", width=950, height=150, highlightbackground="#C3073F", highlightthickness=2)
-            self.quiz.place(x=25, y=y_value)
-            self.question = Label(self.quiz, text=quiz_list[0].questions[count]['question'], font=("Arial", 16), bg="#1A1A1D", fg="white")
-            self.question.place(x=10,y=5)
+        self.quiz_header = Label(self.root, text='swag', font=("Arial", 18), bg="#1A1A1D", fg="#C3073F")
+        self.quiz_header.place(x=25, y=90)
 
-            self.home_button = Button(self.quiz, text="Home", width=12, height=3, bd=0, bg="#C3073F",
-                                activebackground = "#FFF", activeforeground="#C3073F")
-            self.home_button.place(x=100, y=50)
+        self.frame_list = []
 
-            
+        for i in range(3):
+            quiz_list = self.createQuizObjects()
 
-    def test(self):
-        print(self.answer1.get())
-        print(self.answer2.get())
+            count = 0
+
+            self.question_header = Label(self.root, text=quiz_list[0].questions[count]['question'], font=("Arial", 18), bg="#1A1A1D", fg="#C3073F")
+            self.question_header.place(x=25, y=125)
+
+            frame_name = "question{}".format(i)
+
+            self.frame_name = Frame(self.root, bg="#1A1A1D", width=950, height=350, highlightbackground="#C3073F", highlightthickness=2)
+            self.frame_name.place(x=25, y=170)
+
+            self.a1_button = Button(self.frame_name, text="1.", width=12, height=6, bd=0, bg="#C3073F",
+                                    activebackground = "#FFF", activeforeground="#C3073F")
+            self.a1_button.place(x=10, y=10)
+
+            self.a1_label = Label(self.frame_name, text=quiz_list[0].questions[count]['answers'][0], font=("Arial", 18), bg="#1A1A1D", fg="#C3073F")
+            self.a1_label.place(x=110, y=40)
+
+            self.devider = Frame(self.frame_name, bg="#C3073F", width=950, height=2)
+            self.devider.place(x=0, y=116)
+
+            self.a2_button = Button(self.frame_name, text="2.", width=12, height=6, bd=0, bg="#C3073F",
+                                    activebackground = "#FFF", activeforeground="#C3073F")
+            self.a2_button.place(x=10, y=127)
+
+            self.a1_label = Label(self.frame_name, text=quiz_list[0].questions[count]['answers'][1], font=("Arial", 18), bg="#1A1A1D", fg="#C3073F")
+            self.a1_label.place(x=110, y=160)
+                
+            self.devider = Frame(self.frame_name, bg="#C3073F", width=950, height=2)
+            self.devider.place(x=0, y=232)
+
+            self.a3_button = Button(self.frame_name, text="3.", width=12, height=6, bd=0, bg="#C3073F",
+                                    activebackground = "#FFF", activeforeground="#C3073F")
+            self.a3_button.place(x=10, y=242)
+
+            self.a1_label = Label(self.frame_name, text=quiz_list[0].questions[count]['answers'][2], font=("Arial", 18), bg="#1A1A1D", fg="#C3073F")
+            self.a1_label.place(x=110, y=270)
+
+            self.count += 1
+
+            self.frame_list.append(self.frame_name)
+            print(self.frame_list)
+
+        self.test_count = 0
+
+        self.next_button = Button(self.root, text="Next", width=12, height=2, bd=0, bg="#C3073F",
+                                activebackground = "#FFF", activeforeground="#C3073F", command=lambda: self.renderQuestion(self.frame_list, self.test_count))
+        self.next_button.place(x=885, y= 540)
+
+    def renderQuestion(self, frame_list, count):
+        print(count)
+        print(frame_list)
+        frame_list[count].tkraise()
+        self.test_count += 1
+
 
     def createQuizObjects(self):
         json_object = Json("JSON\\Quizzes.json")
